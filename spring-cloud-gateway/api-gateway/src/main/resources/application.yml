@@ -7,9 +7,4 @@ spring:
           predicates:
             - Path=/user/**
           filters:
-            - AddRequestParameter=name, kim
-
-        - id: product-service
-          uri: http://localhost:8082
-          predicates:
-            - Path=/product/**
+            - AddRequestHeader=Accept, application/json
