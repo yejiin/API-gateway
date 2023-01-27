@@ -1,3 +1,7 @@
+logging:
+  level:
+    com.example.apigateway: debug
+
 spring:
   cloud:
     gateway:
@@ -8,3 +12,12 @@ spring:
             - Path=/user/**
           filters:
             - AddRequestHeader=Accept, application/json
+            - CustomUserFilter  # Custom filter class 파일 명
+
+
+      default-filters:
+        - name: GlobalFilter  # Global filter class 파일 명
+          args:  # static Config class 에 전달할 값 정의
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
