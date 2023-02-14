@@ -1,4 +1,4 @@
-package com.example.apigateway;
+package com.example.apigateway.filter;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -8,13 +8,11 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 @Slf4j
 @Component
-public class CustomUserFilter extends AbstractGatewayFilterFactory<CustomUserFilter.Config> {
+public class CustomProductFilter extends AbstractGatewayFilterFactory<CustomProductFilter.Config> {
 
-    public CustomUserFilter() {
+    public CustomProductFilter() {
         super(Config.class);
     }
 
@@ -25,11 +23,11 @@ public class CustomUserFilter extends AbstractGatewayFilterFactory<CustomUserFil
             ServerHttpRequest request = exchange.getRequest();
             ServerHttpResponse response = exchange.getResponse();
 
-            log.debug("Custom User Pre Filter : request id = {}", request.getId());
+            log.debug("Custom Product Pre Filter : request id = {}", request.getId());
 
             // post filter 동작
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
-                log.debug("Custom User Post Filter : response code -> {}", response.getStatusCode());
+                log.debug("Custom Product Post Filter : response code -> {}", response.getStatusCode());
             }));
         });
     }
