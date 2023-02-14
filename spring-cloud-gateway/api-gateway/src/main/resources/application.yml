@@ -11,13 +11,13 @@ spring:
           predicates:
             - Path=/user/**
           filters:
-            - AddRequestHeader=Accept, application/json
-            - CustomUserFilter  # Custom filter class 파일 명
+            - AddRequestHeader=user-request, user-request-header
+            - AddResponseHeader=user-response, user-response-header
 
-
-      default-filters:
-        - name: GlobalFilter  # Global filter class 파일 명
-          args:  # static Config class 에 전달할 값 정의
-            baseMessage: Spring Cloud Gateway Global Filter
-            preLogger: true
-            postLogger: true
+        - id: product-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/product/**
+          filters:
+            - AddRequestHeader=product-request, product-request-header
+            - AddResponseHeader=product-response, product-response-header
