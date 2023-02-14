@@ -5,6 +5,12 @@ logging:
 spring:
   cloud:
     gateway:
+      default-filters:
+        - name: CustomGlobalFilter # Global filter class파일 명
+          args: # static Config class에 전달할 값 정의
+            baseMessage: Spring Cloud Gateway Global Filter
+            preLogger: true
+            postLogger: true
       routes:
         - id: user-service
           uri: http://localhost:8081
@@ -13,7 +19,6 @@ spring:
           filters:
             - AddRequestHeader=user-request, user-request-header
             - AddResponseHeader=user-response, user-response-header
-
         - id: product-service
           uri: http://localhost:8082
           predicates:

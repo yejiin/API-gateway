@@ -1,5 +1,6 @@
-package com.example.apigateway;
+package com.example.apigateway.filter;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -11,9 +12,9 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @Component
-public class GlobalFilter extends AbstractGatewayFilterFactory<com.example.apigateway.GlobalFilter.Config> {
+public class CustomGlobalGatewayFilter extends AbstractGatewayFilterFactory<CustomGlobalGatewayFilter.Config> {
 
-    public GlobalFilter() {
+    public CustomGlobalGatewayFilter() {
         super(Config.class);
     }
 
@@ -41,6 +42,7 @@ public class GlobalFilter extends AbstractGatewayFilterFactory<com.example.apiga
     }
 
     @Data
+    @AllArgsConstructor
     public static class Config {
         private String baseMessage;
         private boolean preLogger;
