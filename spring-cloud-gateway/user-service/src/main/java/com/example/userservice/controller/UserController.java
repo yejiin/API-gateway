@@ -1,6 +1,7 @@
 package com.example.userservice.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -18,5 +19,11 @@ public class UserController {
     public String getPathVariable(@PathVariable("id") String id) {
         log.debug("UserController.getPathVariable id:{}", id);
         return "user - getPathVariable";
+    }
+
+    @GetMapping("/auth")
+    public String authorization(@RequestHeader HttpHeaders headers) {
+        log.debug("UserController.authorization : {}", headers);
+        return "user - authorization";
     }
 }
