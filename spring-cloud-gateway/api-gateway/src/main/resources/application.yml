@@ -16,10 +16,15 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/user/**
+            - QueryParam=id
+#            - name: QueryParam
+#              args:
+#                param: id
           filters:
             - AddRequestHeader=user-request, user-request-header
             - AddResponseHeader=user-response, user-response-header
             - CustomUserFilter
+            - SetPath=/user/{id}
         - id: product-service
           uri: http://localhost:8082
           predicates:

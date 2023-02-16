@@ -1,17 +1,22 @@
 package com.example.userservice.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("/user")
+@Slf4j
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @GetMapping("")
     public String addRequestHeader(@RequestHeader(value="Accept") String accept) {
-        System.out.println("Accept = " + accept);
+        log.debug("Accept:{}" + accept);
         return "user - addRequestHeader";
+    }
+
+    @GetMapping("/{id}")
+    public String getPathVariable(@PathVariable("id") String id) {
+        log.debug("UserController.getPathVariable id:{}", id);
+        return "user - getPathVariable";
     }
 }
